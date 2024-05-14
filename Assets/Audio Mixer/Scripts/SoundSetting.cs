@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -6,8 +7,8 @@ public class SoundSetting : MonoBehaviour
     private const string Master = "Master";
     private const string Button = "Button";
     private const string Background = "Background";
-    private const string MusicEnabled = "MusicEnabled";
-    private const string TotalVolume = "TotalVolume";
+
+    public Action<bool> MusicEnabled;
 
     [SerializeField] private AudioMixerGroup _audioMixerGroup;
 
@@ -24,7 +25,7 @@ public class SoundSetting : MonoBehaviour
 
         _isOffSound = !_isOffSound;
 
-        PlayerPrefs.SetInt(MusicEnabled, _isOffSound ? 1 : 0);
+        MusicEnabled?.Invoke(_isOffSound);
     }
 
     public void ChangeTotalVolume(float value)
@@ -32,11 +33,10 @@ public class SoundSetting : MonoBehaviour
         if (_isOffSound)
         {
             _isOffSound = !_isOffSound;
-            PlayerPrefs.SetInt(MusicEnabled, _isOffSound ? 1 : 0);
+            MusicEnabled?.Invoke(_isOffSound);
         }
 
         ChangeVolume(Master, value);
-        PlayerPrefs.SetFloat(TotalVolume, value);
     }
 
     public void ChangeButtonVolume(float value)

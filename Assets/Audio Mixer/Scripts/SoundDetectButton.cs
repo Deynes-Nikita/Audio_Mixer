@@ -3,17 +3,27 @@ using UnityEngine;
 
 public class SoundDetectButton : MonoBehaviour
 {
-    private const string MusicEnabled = "MusicEnabled";
     private const string SoundOn = "«‚ÛÍ ¬ À";
     private const string SoundOff = "«‚ÛÍ ¬€ À";
 
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private SoundSetting _soundSetting;
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        if (PlayerPrefs.GetInt(MusicEnabled) == 0)
-            _text.text = SoundOn;
-        else
+        _soundSetting.MusicEnabled += ChangeTextInBottun;
+    }
+
+    private void OnDisable()
+    {
+        _soundSetting.MusicEnabled -= ChangeTextInBottun;
+    }
+
+    private void ChangeTextInBottun(bool musicEnabled)
+    {
+        if (musicEnabled)
             _text.text = SoundOff;
+        else
+            _text.text = SoundOn;
     }
 }

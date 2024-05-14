@@ -3187,6 +3187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 483837805}
+  _soundSetting: {fileID: 2072491552}
 --- !u!1 &1670330139
 GameObject:
   m_ObjectHideFlags: 0
