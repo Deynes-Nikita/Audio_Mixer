@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -8,13 +7,14 @@ public class SoundSetting : MonoBehaviour
     private const string Button = "Button";
     private const string Background = "Background";
 
-    public Action<bool> MusicEnabled;
-
     [SerializeField] private AudioMixerGroup _audioMixerGroup;
 
     private bool _isOffSound = false;
     private float _minVolue = 0.001f;
     private float _maxVolue = 1f;
+
+    public delegate void OnToggleChange(bool isOffSound);
+    public event OnToggleChange MusicEnabled;
 
     public void ToggleMusic()
     {
